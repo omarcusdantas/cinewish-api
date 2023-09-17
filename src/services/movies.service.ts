@@ -1,8 +1,12 @@
 import moviesRepository from "@/respositories/movies.repository";
-import { Movie } from "@/protocols/movies.protocol";
+import { Movie, CreateMovie } from "@/protocols/movies.protocol";
 
 function getMovies(): Promise<Movie[]> {
   return moviesRepository.readMovies();
+}
+
+function create(newMovie: CreateMovie) {
+  return moviesRepository.create(newMovie);
 }
 
 function getById(id: number): Promise<Movie> {
@@ -13,5 +17,5 @@ function deleteById(id: number)  {
   return moviesRepository.deleteById(id);
 }
 
-const moviesService = { getMovies, getById, deleteById };
+const moviesService = { getMovies, create, getById, deleteById };
 export default moviesService;
