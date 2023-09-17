@@ -4,7 +4,8 @@ import moviesService from "@/services/movies.service";
 import { CreateMovie } from "@/protocols/movies.protocol";
 
 async function get(req: Request, res: Response): Promise<Response> {
-  const movies = await moviesService.getMovies();
+  const { genre } = req.params;
+  const movies = await moviesService.getMovies(genre);
   return res.status(httpStatus.OK).send(movies);
 }
 

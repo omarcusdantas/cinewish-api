@@ -1,8 +1,8 @@
 import moviesRepository from "@/respositories/movies.repository";
 import { Movie, CreateMovie } from "@/protocols/movies.protocol";
 
-function getMovies(): Promise<Movie[]> {
-  return moviesRepository.readMovies();
+function getMovies(genre: string): Promise<Movie[]> {
+  return moviesRepository.readMovies(genre);
 }
 
 function create(newMovie: CreateMovie) {

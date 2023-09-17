@@ -2,8 +2,17 @@ import db from "@/database/database.connection";
 import { Movie, CreateMovie } from "@/protocols/movies.protocol";
 import { QueryResult } from "pg";
 
-async function readMovies(): Promise<Movie[]> {
-  return (await db.query<Movie>("SELECT * FROM movies")).rows;
+async function readMovies(genre: string): Promise<Movie[]> {
+  let query = "SELECT * FROM movies";
+  const queryParams = [];
+  
+  if (genre) {
+    query += " WHERE genre = $1";
+    queryParams.push(genre);
+  }
+
+  const { rows } = await db.query<Movie>(query, queryParams);
+  return rows;
 }
 
 function create(newMovie: CreateMovie): Promise<QueryResult<CreateMovie>> {
