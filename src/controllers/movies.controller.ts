@@ -7,8 +7,20 @@ async function get(req: Request, res: Response): Promise<Response> {
     return res.status(httpStatus.OK).send(movies);
 }
 
+async function deleteOne(req: Request, res: Response): Promise<Response> {
+    const id = Number(req.params.id);
+    const movie = await moviesService.getById(id);
+
+    if (!movie) {
+        return res.status(httpStatus.NOT_FOUND).send("Movie not found");
+    }
+
+    await moviesService.deleteById(id);
+    res.sendStatus(httpStatus.NO_CONTENT);
+}
+
 const moviesController = {
-    get,
+    get, deleteOne
 };
 
 export default moviesController;
