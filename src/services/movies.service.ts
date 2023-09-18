@@ -13,7 +13,7 @@ function getById(id: number): Promise<Movie> {
   return moviesRepository.readById(id);
 }
 
-function deleteById(id: number)  {
+function deleteById(id: number) {
   return moviesRepository.deleteById(id);
 }
 

@@ -5,7 +5,7 @@ import { QueryResult } from "pg";
 async function readMovies(genre: string): Promise<Movie[]> {
   let query = "SELECT * FROM movies";
   const queryParams = [];
-  
+
   if (genre) {
     query += " WHERE genre = $1";
     queryParams.push(genre);
@@ -24,7 +24,7 @@ async function readById(id: number): Promise<Movie> {
 }
 
 function deleteById(id: number): Promise<QueryResult<Movie>> {
-  return db.query<Movie>("DELETE * FROM movies WHERE id = $1", [id]);
+  return db.query<Movie>("DELETE FROM movies WHERE id = $1", [id]);
 }
 
 const moviesRepository = { readMovies, readById, deleteById, create };
